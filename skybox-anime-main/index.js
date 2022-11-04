@@ -65,7 +65,7 @@ export default () => {
           vec3 sun_color = vec3(1., .7, .55);
           float sun_amount = max(dot(eye_dir, cld_sun_dir), 0.);
 
-          vec3 sky = mix(vec3(.0, .1, .4), vec3(.3, .6, .8), 1.0 - eye_dir.y);
+          vec3 sky = mix(vec3(.012, .055, .18), vec3(.1, .2, .3), 1.0 - eye_dir.y);
           sky += sun_color * min(pow(sun_amount, 1500.0) * 5.0, 1.0);
           sky += sun_color * min(pow(sun_amount, 10.0) * .6, 1.0);
 
