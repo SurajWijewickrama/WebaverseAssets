@@ -1,6 +1,7 @@
-import * as THREE from 'three';
-import metaversefile from 'metaversefile';
-const {useApp, useFrame, useCamera, useInternals, useThreeUtils} = metaversefile;
+import * as THREE from "three";
+import metaversefile from "metaversefile";
+const { useApp, useFrame, useCamera, useInternals, useThreeUtils } =
+  metaversefile;
 
 const localVector = new THREE.Vector3();
 const localVector2 = new THREE.Vector3();
@@ -10,8 +11,8 @@ const localMatrix2 = new THREE.Matrix4();
 
 export default () => {
   const app = useApp();
-  const {renderer} = useInternals();
-  const {BufferGeometryUtils} = useThreeUtils();
+  const { renderer } = useInternals();
+  const { BufferGeometryUtils } = useThreeUtils();
 
   {
     /* let _phi = 120;
@@ -19,21 +20,19 @@ export default () => {
     let _dayPassSpeed = 0.01;
     let sunObj = new THREE.DirectionalLight(0xFFFFFF, 2); */
 
-    const sphereGeometry = new THREE.SphereBufferGeometry(300)
-      .applyMatrix4(
-        new THREE.Matrix4()
-          .makeScale(-1, 1, 1)
-      );
+    const sphereGeometry = new THREE.SphereBufferGeometry(300).applyMatrix4(
+      new THREE.Matrix4().makeScale(-1, 1, 1)
+    );
     const material = new THREE.ShaderMaterial({
       uniforms: {
-        luminance: {value: 20, needsUpdate: true,},
-        turbidity: {value: 0, needsUpdate: true,},
-        rayleigh: {value: 0.5, needsUpdate: true,},
-        mieCoefficient: {value: 0.5, needsUpdate: true,},
-        mieDirectionalG: {value: 1, needsUpdate: true,},
-        sunPosition: {value: new THREE.Vector3(0, 100, 0), needsUpdate: true,},
-        cameraPos: {value: new THREE.Vector3(0, 10, 0), needsUpdate: true,},
-        iTime: {value: 0, needsUpdate: true,}
+        luminance: { value: 10, needsUpdate: true },
+        turbidity: { value: 0, needsUpdate: true },
+        rayleigh: { value: 0.5, needsUpdate: true },
+        mieCoefficient: { value: 0.5, needsUpdate: true },
+        mieDirectionalG: { value: 1, needsUpdate: true },
+        sunPosition: { value: new THREE.Vector3(0, 100, 0), needsUpdate: true },
+        cameraPos: { value: new THREE.Vector3(0, 10, 0), needsUpdate: true },
+        iTime: { value: 0, needsUpdate: true },
       },
       vertexShader: `
         ${THREE.ShaderChunk.common}
@@ -51,7 +50,7 @@ export default () => {
           ${THREE.ShaderChunk.logdepthbuf_vertex}
         }
       `,
-    
+
       fragmentShader: `
         #define cld_sun_dir normalize(vec3(0, 0/*abs(sin(iTime * .3))*/, -1))
       
@@ -81,49 +80,61 @@ export default () => {
 
           ${THREE.ShaderChunk.logdepthbuf_fragment}
         }`,
-        depthWrite: false,
+      depthWrite: false,
     });
     const o = new THREE.Mesh(sphereGeometry, material);
     app.add(o);
 
     let now = 0;
-    useFrame(({timestamp, timeDiff}) => {
+    useFrame(({ timestamp, timeDiff }) => {
       const camera = useCamera();
-      localMatrix.compose(camera.position, localQuaternion.identity(), localVector2.set(1, 1, 1))
+      localMatrix
+        .compose(
+          camera.position,
+          localQuaternion.identity(),
+          localVector2.set(1, 1, 1)
+        )
         .premultiply(localMatrix2.copy(app.matrixWorld).invert())
         .decompose(o.position, localQuaternion, localVector2);
       o.updateMatrixWorld();
 
-      material.uniforms.iTime.value = now/500000;
+      material.uniforms.iTime.value = now / 500000;
       material.uniforms.iTime.needsUpdate = true;
       now += timeDiff;
     });
   }
   {
-    const planeGeometry = new THREE.PlaneBufferGeometry(10000, 10000)
-      .applyMatrix4(
-        new THREE.Matrix4()
-          .makeRotationFromQuaternion(
-            new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI/2)
-          )
-      );
-    const ys = new Float32Array(planeGeometry.attributes.position.array.length/3 );
+    const planeGeometry = new THREE.PlaneBufferGeometry(
+      10000,
+      10000
+    ).applyMatrix4(
+      new THREE.Matrix4().makeRotationFromQuaternion(
+        new THREE.Quaternion().setFromAxisAngle(
+          new THREE.Vector3(1, 0, 0),
+          Math.PI / 2
+        )
+      )
+    );
+    const ys = new Float32Array(
+      planeGeometry.attributes.position.array.length / 3
+    );
     ys.fill(0);
-    planeGeometry.setAttribute('y', new THREE.BufferAttribute(ys, 1));
+    planeGeometry.setAttribute("y", new THREE.BufferAttribute(ys, 1));
     const planeGeometry2 = new THREE.PlaneBufferGeometry(10000, 10000)
       .applyMatrix4(
-        new THREE.Matrix4()
-          .makeRotationFromQuaternion(
-            new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI/2)
+        new THREE.Matrix4().makeRotationFromQuaternion(
+          new THREE.Quaternion().setFromAxisAngle(
+            new THREE.Vector3(1, 0, 0),
+            Math.PI / 2
           )
+        )
       )
-      .applyMatrix4(
-        new THREE.Matrix4()
-          .makeTranslation(0, 5, 0)
-      );
-    const ys2 = new Float32Array(planeGeometry.attributes.position.array.length/3);
+      .applyMatrix4(new THREE.Matrix4().makeTranslation(0, 5, 0));
+    const ys2 = new Float32Array(
+      planeGeometry.attributes.position.array.length / 3
+    );
     ys2.fill(1);
-    planeGeometry2.setAttribute('y', new THREE.BufferAttribute(ys2, 1));
+    planeGeometry2.setAttribute("y", new THREE.BufferAttribute(ys2, 1));
     const geometry = BufferGeometryUtils.mergeBufferGeometries([
       planeGeometry2,
       planeGeometry,
@@ -810,7 +821,7 @@ export default () => {
     o.updateMatrixWorld();
     let uniformsNeedUpdate = o.material.uniformsNeedUpdate;
     let forceUniformsNeedUpdate = false;
-    Object.defineProperty(o.material, 'uniformsNeedUpdate', {
+    Object.defineProperty(o.material, "uniformsNeedUpdate", {
       get() {
         return forceUniformsNeedUpdate || uniformsNeedUpdate;
       },
@@ -818,17 +829,21 @@ export default () => {
         uniformsNeedUpdate = v;
       },
     });
-    
+
     // const globalCamera = camera;
-    const globalRenderer = renderer;  
+    const globalRenderer = renderer;
     o.onBeforeRender = (renderer, scene, camera, geometry, material, group) => {
       forceUniformsNeedUpdate = true;
-      
+
       const renderTarget = renderer.getRenderTarget();
       if (renderTarget) {
-        o.material.uniforms.iResolution.value.set(renderTarget.width, renderTarget.height);
+        o.material.uniforms.iResolution.value.set(
+          renderTarget.width,
+          renderTarget.height
+        );
       } else {
-        globalRenderer.getSize(o.material.uniforms.iResolution.value)
+        globalRenderer
+          .getSize(o.material.uniforms.iResolution.value)
           .multiplyScalar(globalRenderer.getPixelRatio());
         o.material.uniforms.iResolution.needsUpdate = true;
       }
@@ -836,18 +851,18 @@ export default () => {
     o.onAfterRender = () => {
       forceUniformsNeedUpdate = false;
     };
-    
+
     let now = 0;
-    useFrame(({timestamp, timeDiff}) => {
-      material.uniforms.iTime.value = now/500000;
+    useFrame(({ timestamp, timeDiff }) => {
+      material.uniforms.iTime.value = now / 500000;
       material.uniforms.iTime.needsUpdate = true;
-      
+
       now += timeDiff;
     });
     app.add(o);
   }
-  
-  app.setComponent('renderPriority', 'low');
-  
+
+  app.setComponent("renderPriority", "low");
+
   return app;
 };
