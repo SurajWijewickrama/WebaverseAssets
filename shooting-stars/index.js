@@ -158,19 +158,6 @@ export default () => {
       audioLoader.load(url, accept, function onprogress() {}, reject);
     });
 
-    for (const asteroid of asteroids) {
-      localMatrix.compose(asteroid.position, asteroid.quat, asteroid.scale);
-      const newAsteroid = new PhysicalAsteroid(
-        app,
-        group,
-        localMatrix,
-        physics,
-        physicsIds
-      );
-      allAsteroids.push(newAsteroid);
-      console.log(allAsteroids);
-    }
-
     createAsteroidField(group, soundBuffer);
     app.updateMatrixWorld();
   })();
@@ -213,19 +200,9 @@ export default () => {
   const createAsteroidField = (group, soundBuffer) => {
     for (let i = 0; i < 1; i++) {
       localMatrix.compose(
-        localVector.randomDirection().multiplyScalar(1).addScalar(30),
+        localVector.randomDirection().multiplyScalar(1).addScalar(1),
         localQuaternion.random(),
-        localVector2.random().divideScalar(10)
-      );
-      const newAsteroid = new Asteroid(app, group, localMatrix);
-      allAsteroids.push(newAsteroid);
-    }
-
-    for (let i = 0; i < 1; i++) {
-      localMatrix.compose(
-        localVector.randomDirection().multiplyScalar(100).addScalar(30),
-        localQuaternion.random(),
-        localVector2.random().divideScalar(10)
+        localVector2.random().divideScalar(1)
       );
       const newMovingAsteroid = new MovingAsteroid(
         app,
@@ -239,7 +216,7 @@ export default () => {
 
     for (let i = 0; i < 1; i++) {
       localMatrix.compose(
-        localVector.randomDirection().multiplyScalar(15).addScalar(10),
+        localVector.randomDirection().multiplyScalar(1).addScalar(1),
         localQuaternion.random(),
         localVector2.random().divideScalar(12)
       );
