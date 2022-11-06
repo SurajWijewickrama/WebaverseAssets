@@ -168,6 +168,7 @@ export default () => {
         physicsIds
       );
       allAsteroids.push(newAsteroid);
+      console.log(allAsteroids);
     }
 
     createAsteroidField(group, soundBuffer);
