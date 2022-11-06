@@ -136,21 +136,6 @@ export default () => {
       quat: new THREE.Quaternion(0, 0, 0, 1),
       scale: new THREE.Vector3(0.04, 0.04, 0.04),
     },
-    {
-      position: new THREE.Vector3(8, 0, 0),
-      quat: new THREE.Quaternion(0, 0.7071067811865475, 0, 0.7071067811865476),
-      scale: new THREE.Vector3(0.03, 0.03, 0.03),
-    },
-    {
-      position: new THREE.Vector3(16, 0, 0),
-      quat: new THREE.Quaternion(0, 0, 0, 1),
-      scale: new THREE.Vector3(0.02, 0.02, 0.02),
-    },
-    {
-      position: new THREE.Vector3(27, -10, 5),
-      quat: new THREE.Quaternion(0, 1, 0, 0),
-      scale: new THREE.Vector3(0.05, 0.03, 0.05),
-    },
   ];
 
   const audioListener = new THREE.AudioListener();
@@ -160,7 +145,7 @@ export default () => {
     gltf = await new Promise((accept, reject) => {
       const { gltfLoader } = useLoaders();
       const url =
-        "https://webaverse.github.io/asteroids/assets/rock/scene.gltf";
+        "https://SurajWijewickrama.github.io/WebaverseAssets/shooting-stars/assets/rock/scene.gltf";
       gltfLoader.load(url, accept, function onprogress() {}, reject);
     });
 
@@ -169,7 +154,7 @@ export default () => {
     soundBuffer = await new Promise((accept, reject) => {
       const audioLoader = new THREE.AudioLoader();
       const url =
-        "https://webaverse.github.io/asteroids/assets/audio/white-noise.mp3";
+        "https://SurajWijewickrama.github.io/WebaverseAssets/shooting-stars/assets/audio/white-noise.mp3";
       audioLoader.load(url, accept, function onprogress() {}, reject);
     });
 
