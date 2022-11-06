@@ -136,7 +136,7 @@ export default () => {
     gltf = await new Promise((accept, reject) => {
       const { gltfLoader } = useLoaders();
       const url =
-        "https://SurajWijewickrama.github.io/WebaverseAssets/stars.glb";
+        "https://SurajWijewickrama.github.io/WebaverseAssets/glow-stars.glb";
       gltfLoader.load(url, accept, function onprogress() {}, reject);
     });
 
