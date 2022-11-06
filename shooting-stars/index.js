@@ -149,7 +149,7 @@ export default () => {
       audioLoader.load(url, accept, function onprogress() {}, reject);
     });
 
-    // createAsteroidField(group, soundBuffer);
+    createAsteroidField(group, soundBuffer);
     app.updateMatrixWorld();
   })();
 
