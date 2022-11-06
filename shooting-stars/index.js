@@ -110,7 +110,7 @@ export default () => {
       movingAsteroids.push(this);
     }
     move() {
-      if (this.group.position.x > 300) {
+      if (this.group.position.x > 600) {
         this.group.position.setX(-300);
       }
       this.group.position.setX(this.group.position.x + this.velocityX);
