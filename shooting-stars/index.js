@@ -56,15 +56,6 @@ export default () => {
     }
   }
 
-  class PhysicalAsteroid extends Asteroid {
-    constructor(app, group, localMatrix, physics, physicsIds) {
-      super(app, group, localMatrix);
-
-      this.physicsId = physics.addGeometry(this.group);
-      physicsIds.push(this.physicsId);
-    }
-  }
-
   class MovingAsteroid extends Asteroid {
     constructor(app, group, localMatrix, localEuler, movingAsteroids) {
       super(app, group, localMatrix);
@@ -141,26 +132,26 @@ export default () => {
   const audioListener = new THREE.AudioListener();
   localPlayer.add(audioListener);
 
-  // (async () => {
-  //   gltf = await new Promise((accept, reject) => {
-  //     const { gltfLoader } = useLoaders();
-  //     const url =
-  //       "https://SurajWijewickrama.github.io/WebaverseAssets/shooting-stars/assets/rock/scene.gltf";
-  //     gltfLoader.load(url, accept, function onprogress() {}, reject);
-  //   });
+  (async () => {
+    gltf = await new Promise((accept, reject) => {
+      const { gltfLoader } = useLoaders();
+      const url =
+        "https://SurajWijewickrama.github.io/WebaverseAssets/shooting-stars/assets/rock/scene.gltf";
+      gltfLoader.load(url, accept, function onprogress() {}, reject);
+    });
 
-  //   let group = gltf.scene;
+    let group = gltf.scene;
 
-  //   soundBuffer = await new Promise((accept, reject) => {
-  //     const audioLoader = new THREE.AudioLoader();
-  //     const url =
-  //       "https://SurajWijewickrama.github.io/WebaverseAssets/shooting-stars/assets/audio/white-noise.mp3";
-  //     audioLoader.load(url, accept, function onprogress() {}, reject);
-  //   });
+    soundBuffer = await new Promise((accept, reject) => {
+      const audioLoader = new THREE.AudioLoader();
+      const url =
+        "https://SurajWijewickrama.github.io/WebaverseAssets/shooting-stars/assets/audio/white-noise.mp3";
+      audioLoader.load(url, accept, function onprogress() {}, reject);
+    });
 
-  //   // createAsteroidField(group, soundBuffer);
-  //   app.updateMatrixWorld();
-  // })();
+    // createAsteroidField(group, soundBuffer);
+    app.updateMatrixWorld();
+  })();
 
   let lastFoundObj;
   useFrame(({ timeDiff, timestamp }) => {
