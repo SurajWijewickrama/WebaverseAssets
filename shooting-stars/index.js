@@ -150,6 +150,9 @@ export default () => {
     });
 
     createAsteroidField(group, soundBuffer);
+    const pointLight = new THREE.PointLight(0x5c10e8, 1);
+    pointLight.castShadows = true;
+    app.add(pointLight);
     app.updateMatrixWorld();
   })();
 
