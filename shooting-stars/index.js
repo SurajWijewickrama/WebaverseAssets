@@ -212,7 +212,7 @@ export default () => {
   const createAsteroidField = (group, soundBuffer) => {
     for (let i = 0; i < 1; i++) {
       localMatrix.compose(
-        localVector.randomDirection().multiplyScalar(100).addScalar(30),
+        localVector.randomDirection().multiplyScalar(1).addScalar(30),
         localQuaternion.random(),
         localVector2.random().divideScalar(10)
       );
