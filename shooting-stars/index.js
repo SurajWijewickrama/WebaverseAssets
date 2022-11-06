@@ -69,7 +69,7 @@ export default () => {
     constructor(app, group, localMatrix, localEuler, movingAsteroids) {
       super(app, group, localMatrix);
 
-      this.velocityX = Math.random() ** 2;
+      this.velocityX = 0.5;
       localEuler.set(
         Math.random() / 100,
         Math.random() / 100,
@@ -132,7 +132,7 @@ export default () => {
 
   let asteroids = [
     {
-      position: new THREE.Vector3(0, 0, 0),
+      position: new THREE.Vector3(0, 30, 0),
       quat: new THREE.Quaternion(0, 0, 0, 1),
       scale: new THREE.Vector3(0.04, 0.04, 0.04),
     },
@@ -210,7 +210,7 @@ export default () => {
   };
 
   const createAsteroidField = (group, soundBuffer) => {
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 1; i++) {
       localMatrix.compose(
         localVector.randomDirection().multiplyScalar(100).addScalar(30),
         localQuaternion.random(),
@@ -220,7 +220,7 @@ export default () => {
       allAsteroids.push(newAsteroid);
     }
 
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 1; i++) {
       localMatrix.compose(
         localVector.randomDirection().multiplyScalar(100).addScalar(30),
         localQuaternion.random(),
@@ -236,7 +236,7 @@ export default () => {
       allAsteroids.push(newMovingAsteroid);
     }
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 1; i++) {
       localMatrix.compose(
         localVector.randomDirection().multiplyScalar(15).addScalar(10),
         localQuaternion.random(),
