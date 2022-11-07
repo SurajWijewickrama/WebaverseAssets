@@ -136,7 +136,7 @@ export default () => {
     gltf = await new Promise((accept, reject) => {
       const { gltfLoader } = useLoaders();
       const url =
-        "https://SurajWijewickrama.github.io/WebaverseAssets/glow-stars.glft";
+        "https://SurajWijewickrama.github.io/WebaverseAssets/shooting-stars/assets/rock/textures/scene.glft";
       gltfLoader.load(url, accept, function onprogress() {}, reject);
     });
 
@@ -150,7 +150,7 @@ export default () => {
     });
 
     createAsteroidField(group, soundBuffer);
-    const pointLight = new THREE.PointLight(0x5c10e8, 1);
+    const pointLight = new THREE.PointLight(0x5c10e8, 50);
     pointLight.castShadows = true;
     app.add(pointLight);
     app.updateMatrixWorld();
