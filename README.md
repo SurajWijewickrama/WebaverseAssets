@@ -1,2 +1,2 @@
 # WebaverseAssets
-Assets for webaverse game competition
+Name of the scene fie - bear_corner.scn
