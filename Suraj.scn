@@ -68,8 +68,22 @@
     },
     {
       "position": [
-        12,
-        -2,
+        0,
+        -25,
+        0
+      ],
+      "scale": [
+        5,
+        5,
+        5
+      ],
+      "physics": false,
+      "start_url": "https://SurajWijewickrama.github.io/WebaverseAssets/newland.glb",
+      "dynamic": false
+    },{
+      "position": [
+        0,
+        -25.1,
         0
       ],
       "scale": [
@@ -78,7 +92,7 @@
         5
       ],
       "physics": true,
-      "start_url": "https://SurajWijewickrama.github.io/WebaverseAssets/newland.glb",
+      "start_url": "https://SurajWijewickrama.github.io/WebaverseAssets/newlandLowPoly.glb",
       "dynamic": false
     },
     {
